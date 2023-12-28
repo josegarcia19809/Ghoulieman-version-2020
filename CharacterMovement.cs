@@ -9,10 +9,12 @@ public class CharacterMovement : MonoBehaviour
     public bool facingRight = true;
     public float moveDirection;
     private Rigidbody _rigidbody;
+    private Animator _animator;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -32,6 +34,7 @@ public class CharacterMovement : MonoBehaviour
         {
             Flip();
         }
+        _animator.SetFloat("Speed", Mathf.Abs(moveDirection));
     }
 
     void Flip()
