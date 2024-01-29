@@ -20,7 +20,6 @@ public class Enemy01Move : MonoBehaviour
     {
         if (Vector3.Distance(player.position, this.transform.position) < 12)
         {
-            print("Player in range");
             // Si detecta que el Player está en rango entonces se moverá a esa posición
             _navMeshAgent.SetDestination(player.position);
             _animator.SetBool("isWalking", true);

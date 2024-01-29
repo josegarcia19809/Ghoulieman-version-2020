@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject Player
     {
-        get { return Player; }
+        get { return player; }
     }
 
     public bool GameOver
