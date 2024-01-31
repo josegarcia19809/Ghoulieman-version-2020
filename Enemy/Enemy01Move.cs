@@ -25,5 +25,12 @@ public class Enemy01Move : MonoBehaviour
             _animator.SetBool("isWalking", true);
             _animator.SetBool("isIdle", false);
         }
+
+        if (GameManager.instance.GameOver)
+        {
+            print("Game over");
+            _animator.SetBool("isWalking", false);
+            _animator.SetBool("isIdle", true);
+        }
     }
 }

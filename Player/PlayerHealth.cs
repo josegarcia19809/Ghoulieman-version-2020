@@ -11,11 +11,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float timer = 0.0f;
 
     private Animator _animator;
+    private CharacterMovement _characterMovement;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
         currentHealth = startingHealth;
+        _characterMovement = GetComponent<CharacterMovement>();
     }
 
     // Update is called once per frame
@@ -38,8 +40,17 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeHit()
     {
-        GameManager.instance.PlayerHit(currentHealth);
-        _animator.Play("Player_Hurt");
-        currentHealth -= 10;
+        if (currentHealth > 0)
+        {
+            GameManager.instance.PlayerHit(currentHealth);
+            _animator.Play("Player_Hurt");
+            currentHealth -= 10;
+        }
+        else
+        {
+            GameManager.instance.PlayerHit(currentHealth);
+            _animator.SetTrigger("isDead");
+            _characterMovement.enabled = false;
+        }
     }
 }
