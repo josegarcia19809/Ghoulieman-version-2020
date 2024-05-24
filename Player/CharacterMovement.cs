@@ -24,6 +24,10 @@ public class CharacterMovement : MonoBehaviour
     public Transform knifeSpawn;
     public Rigidbody knifePrefab;
     private Rigidbody clone;
+    
+    // Para los audios
+    private AudioSource _audioSource;
+    public AudioClip jumpAudio;
 
     private void Awake()
     {
@@ -35,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -47,6 +52,7 @@ public class CharacterMovement : MonoBehaviour
         {
             _animator.SetTrigger("isJumping");
             _rigidbody.AddForce(new Vector2(0, jumpSpeed));
+            _audioSource.PlayOneShot(jumpAudio);
         }
     }
 
