@@ -38,6 +38,10 @@ public class Enemy01Health : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        if (dissapearEnemy)
+        {
+            transform.Translate(-Vector3.up * dissaperSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,5 +77,14 @@ public class Enemy01Health : MonoBehaviour
         _navMeshAgent.enabled = false;
         _animator.SetTrigger("EnemyDie");
         _rigidbody.isKinematic = true;
+        StartCoroutine(RemoveEnemy());
+    }
+
+    IEnumerator RemoveEnemy()
+    {
+        yield return new WaitForSeconds(2f);
+        dissapearEnemy = true;
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }
