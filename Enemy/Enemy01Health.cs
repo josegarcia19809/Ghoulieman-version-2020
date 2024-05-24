@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,5 +38,40 @@ public class Enemy01Health : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (timer >= timeSinceLastHit && !GameManager.instance.GameOver)
+        {
+            if (other.tag == "PlayerWeapon")
+            {
+                TakeHit();
+                timer = 0f;
+            }
+        }
+    }
+
+    private void TakeHit()
+    {
+        if (currentHealth > 0f)
+        {
+            _animator.Play("EnemyHurt");
+            currentHealth -= 10;
+        }
+
+        if (currentHealth <= 0)
+        {
+            isAlive = false;
+            KillEnemy();
+        }
+    }
+
+    private void KillEnemy()
+    {
+        _capsuleCollider.enabled = false;
+        _navMeshAgent.enabled = false;
+        _animator.SetTrigger("EnemyDie");
+        _rigidbody.isKinematic = true;
     }
 }
