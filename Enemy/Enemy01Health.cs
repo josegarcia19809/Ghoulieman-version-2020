@@ -18,6 +18,8 @@ public class Enemy01Health : MonoBehaviour
     private Rigidbody _rigidbody;
     private CapsuleCollider _capsuleCollider;
     private bool dissapearEnemy = false;
+    private BoxCollider weaponCollider;
+    private CapsuleCollider enemyCollider;
 
     public bool IsAlive
     {
@@ -32,6 +34,8 @@ public class Enemy01Health : MonoBehaviour
         _animator = GetComponent<Animator>();
         isAlive = true;
         currentHealth = startingHealth;
+        weaponCollider = GetComponentInChildren<BoxCollider>();
+        enemyCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -77,6 +81,8 @@ public class Enemy01Health : MonoBehaviour
         _navMeshAgent.enabled = false;
         _animator.SetTrigger("EnemyDie");
         _rigidbody.isKinematic = true;
+        weaponCollider.enabled = false;
+        enemyCollider.enabled = false;
         StartCoroutine(RemoveEnemy());
     }
 
