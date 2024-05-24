@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int currentHealth;
     [SerializeField] private float timeSinceLastHit = 2.0f;
     [SerializeField] private float timer = 0.0f;
+    [SerializeField] private Slider healthSlider;
 
     private Animator _animator;
     private CharacterMovement _characterMovement;
@@ -45,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
             GameManager.instance.PlayerHit(currentHealth);
             _animator.Play("Player_Hurt");
             currentHealth -= 10;
+            healthSlider.value = currentHealth;
         }
         else
         {
