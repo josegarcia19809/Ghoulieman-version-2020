@@ -34,8 +34,6 @@ public class Enemy01Attack : MonoBehaviour
         {
             playerInRange = false;
         }
-
-        print("Player in range attack" + playerInRange);
     }
 
     IEnumerator attack()
