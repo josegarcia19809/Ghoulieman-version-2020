@@ -9,33 +9,7 @@ Modificado lunes 29 de enero de 2024
 Modificado Miércoles 31 de enero de 2024
 
 Modificado viernes 24 de mayo de 2024
+Modificado miércoles 19 de junio de 2024
+Modificado jueves 20 de junio de 2024
 
 ball_n_chain_root
-
-
-Enemigo Shooter. 
-00:58
-401 - expansion del nivel II
-04:58
-402 - preparacion enemigo archer I
-04:04
-403 - preparacion enemigo archer II
-07:24
-404 - animacion idle de enemigo archer
-04:00
-405 - programacion de ataque enemigo archer I
-06:40
-406 - programacion de ataque enemigo archer II
-03:25
-407 - animacion de ataque enemigo archer
-02:04
-408 - programacion del proyectil del archer
-04:17
-409 - programacion de daños I
-04:24
-410 - programacion de daños II
-06:23
-411 - programacion de daños III
-06:57
-412 - programacion de daños IV
-04:42
