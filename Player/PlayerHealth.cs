@@ -18,6 +18,15 @@ public class PlayerHealth : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip hurtAudio;
     public AudioClip deadAudio;
+    public AudioClip pickItem;
+
+    private ParticleSystem _particleSystem;
+
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        set => currentHealth = value < 0 ? 0 : value;
+    }
 
     void Start()
     {
@@ -63,5 +72,20 @@ public class PlayerHealth : MonoBehaviour
             _characterMovement.enabled = false;
             _audioSource.PlayOneShot(deadAudio);
         }
+    }
+
+    public void PowerUpHealth()
+    {
+        if (currentHealth <= 80)
+        {
+            currentHealth += 20;
+        }
+        else if (currentHealth < startingHealth)
+        {
+            CurrentHealth = startingHealth;
+        }
+
+        healthSlider.value = currentHealth;
+        _audioSource.PlayOneShot(pickItem);
     }
 }
