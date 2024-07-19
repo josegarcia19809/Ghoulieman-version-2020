@@ -7,9 +7,12 @@ public class PowerItem : MonoBehaviour
 {
     private GameObject player;
     private AudioSource audio;
-    private ParticleSystem _particleSystem;
+    private ParticleSystem _particleSystemPlayer;
     private PlayerHealth _playerHealth;
-    
+
+    private MeshRenderer _meshRenderer;
+    private ParticleSystem _particleSystemBrain;
+
     [Obsolete("Obsolete")]
     void Start()
     {
@@ -17,13 +20,37 @@ public class PowerItem : MonoBehaviour
         _playerHealth = player.GetComponent<PlayerHealth>();
         _playerHealth.enabled = true;
 
-        _particleSystem = player.GetComponent<ParticleSystem>();
-        _particleSystem.enableEmission = false;
+        _particleSystemPlayer = player.GetComponent<ParticleSystem>();
+        _particleSystemPlayer.enableEmission = false;
+
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _particleSystemBrain = GetComponent<ParticleSystem>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == player)
+        {
+            StartCoroutine(InvincibleRoutine());
+            _meshRenderer.enabled = false;
+
+        }
+    }
+
+    public IEnumerator InvincibleRoutine()
+    {
+        _particleSystemPlayer.enableEmission = true;
+        _playerHealth.enabled = false;
+        _particleSystemBrain.enableEmission = false;
+        yield return new WaitForSeconds(10f);
+
+        _particleSystemPlayer.enableEmission = false;
+        _playerHealth.enabled = true;
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
