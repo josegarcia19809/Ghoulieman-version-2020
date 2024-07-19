@@ -28,12 +28,16 @@ public class PlayerHealth : MonoBehaviour
         set => currentHealth = value < 0 ? 0 : value;
     }
 
+    [Obsolete("Obsolete")]
     void Start()
     {
         _animator = GetComponent<Animator>();
         currentHealth = startingHealth;
         _characterMovement = GetComponent<CharacterMovement>();
         _audioSource = GetComponent<AudioSource>();
+
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystem.enableEmission = false;
     }
 
     // Update is called once per frame
