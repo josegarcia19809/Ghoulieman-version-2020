@@ -24,6 +24,8 @@ public class Enemy02Health : MonoBehaviour
 
     public bool IsAlive => isAlive;
 
+    private DropItems _dropItems;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -32,6 +34,7 @@ public class Enemy02Health : MonoBehaviour
         isAlive = true;
         currentHealth = startingHealth;
         _audioSource = GetComponent<AudioSource>();
+        _dropItems = GetComponent<DropItems>();
     }
 
     // Update is called once per frame
@@ -80,6 +83,8 @@ public class Enemy02Health : MonoBehaviour
         _rigidbody.isKinematic = true;
         _audioSource.PlayOneShot(killAudio);
         StartCoroutine(RemoveEnemy());
+        
+        _dropItems.Drop();
     }
 
     IEnumerator RemoveEnemy()
