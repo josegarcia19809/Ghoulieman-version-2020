@@ -28,6 +28,13 @@ public class PlayerHealth : MonoBehaviour
         set => currentHealth = value < 0 ? 0 : value;
     }
 
+    public float Timer
+    {
+        get => timer;
+        set => timer = 0;
+    }
+
+
     [Obsolete("Obsolete")]
     void Start()
     {
