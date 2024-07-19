@@ -39,13 +39,19 @@ public class PowerItem : MonoBehaviour
 
     public IEnumerator InvincibleRoutine()
     {
-        _particleSystemPlayer.enableEmission = true;
+        var emissionPlayer = _particleSystemPlayer.emission;
+        emissionPlayer.enabled = true;
         _playerHealth.enabled = false;
-        _particleSystemBrain.enableEmission = false;
+        
+        var emissionBrain = _particleSystemBrain.emission;
+        emissionBrain.enabled = false;
+        
         yield return new WaitForSeconds(10f);
 
-        _particleSystemPlayer.enableEmission = false;
+        emissionPlayer = _particleSystemPlayer.emission;
+        emissionPlayer.enabled = false;
         _playerHealth.enabled = true;
+        
         Destroy(gameObject);
     }
 
