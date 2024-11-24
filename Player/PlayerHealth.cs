@@ -99,4 +99,10 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.value = currentHealth;
         _audioSource.PlayOneShot(pickItem);
     }
+
+    public void KillBox()
+    {
+        CurrentHealth = 0;
+        healthSlider.value = currentHealth;
+    }
 }
