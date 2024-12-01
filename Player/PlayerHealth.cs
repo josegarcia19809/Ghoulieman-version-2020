@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
 
     private ParticleSystem _particleSystem;
 
+    public LevelManager levelManager;
+
     public int CurrentHealth
     {
         get => currentHealth;
@@ -45,12 +47,14 @@ public class PlayerHealth : MonoBehaviour
 
         _particleSystem = GetComponent<ParticleSystem>();
         _particleSystem.enableEmission = false;
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+        PlayerKill();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,5 +108,13 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth = 0;
         healthSlider.value = currentHealth;
+    }
+
+    public void PlayerKill()
+    {
+        if (currentHealth <= 0)
+        {
+            levelManager.RespawnPlayer();
+        }
     }
 }
