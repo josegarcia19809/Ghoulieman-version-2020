@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     private GameObject player;
     private PlayerHealth playerHealth;
     public PlayerHealth playerSlider;
+    private CharacterMovement characterMovement;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,8 @@ public class LevelManager : MonoBehaviour
         player = GameManager.instance.Player;
         playerHealth = player.GetComponent<PlayerHealth>();
         playerSlider = player.GetComponent<PlayerHealth>();
+        characterMovement = player.GetComponent<CharacterMovement>();
+        animator = player.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,8 @@ public class LevelManager : MonoBehaviour
             playerHealth.CurrentHealth = 100;
             timer = 0f;
             playerHealth.HealthSlider.value = playerHealth.CurrentHealth;
+            characterMovement.enabled = true;
+            animator.Play("Blend Tree");
         }
     }
 }
