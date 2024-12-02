@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     private ParticleSystem _particleSystem;
 
     public LevelManager levelManager;
+    public bool isDead;
 
     public int CurrentHealth
     {
@@ -50,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
         _particleSystem = GetComponent<ParticleSystem>();
         _particleSystem.enableEmission = false;
         levelManager = FindObjectOfType<LevelManager>();
+        isDead = false;
     }
 
     // Update is called once per frame

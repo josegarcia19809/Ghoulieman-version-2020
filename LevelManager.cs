@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public PlayerHealth playerSlider;
     private CharacterMovement characterMovement;
     public Animator animator;
+    private LifeManager lifeManager;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class LevelManager : MonoBehaviour
         playerSlider = player.GetComponent<PlayerHealth>();
         characterMovement = player.GetComponent<CharacterMovement>();
         animator = player.GetComponent<Animator>();
+        lifeManager = FindObjectOfType<LifeManager>();
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class LevelManager : MonoBehaviour
         if (timer >= waitTime)
         {
             print("Player Respawn");
+            lifeManager.TakeLife();
             player.transform.position = currentCheckpoint.transform.position;
             playerHealth.CurrentHealth = 100;
             timer = 0f;
