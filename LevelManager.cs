@@ -10,12 +10,14 @@ public class LevelManager : MonoBehaviour
     public GameObject currentCheckpoint;
     private GameObject player;
     private PlayerHealth playerHealth;
+    public PlayerHealth playerSlider;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameManager.instance.Player;
         playerHealth = player.GetComponent<PlayerHealth>();
+        playerSlider = player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,8 @@ public class LevelManager : MonoBehaviour
             print("Player Respawn");
             player.transform.position = currentCheckpoint.transform.position;
             playerHealth.CurrentHealth = 100;
+            timer = 0f;
+            playerHealth.HealthSlider.value = playerHealth.CurrentHealth;
         }
     }
 }

@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
         get => currentHealth;
         set => currentHealth = value < 0 ? 0 : value;
     }
+    
+    public Slider HealthSlider => healthSlider;
 
     public float Timer
     {
