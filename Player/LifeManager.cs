@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LifeManager : MonoBehaviour
 
     private GameObject player;
     public GameObject gameOverScreen;
+    public float waitAfterGameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,16 @@ public class LifeManager : MonoBehaviour
         {
             gameOverScreen.SetActive(true);
             player.gameObject.SetActive(false);
+        }
+
+        if (gameOverScreen.activeSelf)
+        {
+            waitAfterGameOver -= Time.deltaTime;
+        }
+
+        if (waitAfterGameOver < 0)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
