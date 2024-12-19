@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     {
         enemySpawn = GameObject.Find("Spawner").transform;
         player = GameManager.instance.Player;
+        StartCoroutine(SpawnEnemies());
     }
 
     // Update is called once per frame
@@ -34,5 +35,17 @@ public class EnemySpawner : MonoBehaviour
         }
 
         print("Player In Range Spawner: " + playerInRange);
+    }
+
+    public IEnumerator SpawnEnemies()
+    {
+        if (playerInRange && !GameManager.instance.GameOver)
+        {
+            clone = Instantiate(enemyPrefab, enemySpawn.position, enemySpawn.rotation);
+            yield return new WaitForSeconds(timeBetweenSpawns);
+        }
+
+        yield return null;
+        StartCoroutine(SpawnEnemies());
     }
 }
