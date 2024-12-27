@@ -12,11 +12,19 @@ public class BossController : MonoBehaviour
     public float idleTimer = 0.0f;
     public float idleWaitTime = 10.0f;
 
+    private BossHealth bossHealth;
+    public float attackTimer = 0.0f;
+    public float attackWaitTime = 2.0f;
+
+    private BoxCollider swordTrigger;
+
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        bossHealth = GetComponent<BossHealth>();
+        swordTrigger = GameObject.Find("Boss").GetComponentInChildren<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -31,6 +39,19 @@ public class BossController : MonoBehaviour
                 if (!attacking)
                 {
                     idleTimer += Time.deltaTime;
+                }
+                else
+                {
+                    idleTimer = 0.0f;
+                    attackTimer += Time.deltaTime;
+                    if (attackTimer >= attackWaitTime)
+                    {
+                        attacking = false;
+                        attackTimer = 0.0f;
+                        print("Boss Smash");
+                        swordTrigger.enabled = true;
+                        print("Sword Trigger is enable");
+                    }
                 }
 
                 if (idleTimer >= idleWaitTime)
