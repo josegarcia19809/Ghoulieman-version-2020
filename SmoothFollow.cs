@@ -14,10 +14,14 @@ public class SmoothFollow : MonoBehaviour
     public Vector2 minXandY;
 
     public Transform cameraTarget;
+    public Transform bossCameraTarget;
+    public bool bossCameraActive = false;
+    public float cameraSpeed = 30.0f;
 
     private void Awake()
     {
         cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;
+        bossCameraTarget = GameObject.FindGameObjectWithTag("BossCameraTarget").transform;
     }
 
     private bool CheckXMargin()
@@ -49,7 +53,18 @@ public class SmoothFollow : MonoBehaviour
         targetX = Mathf.Clamp(targetX, minXandY.x, maxXandY.x);
         targetY = Mathf.Clamp(targetY, minXandY.y, maxXandY.y);
 
-        transform.position = new Vector3(targetX, targetY, transform.position.z);
+        if (bossCameraActive)
+        {
+            transform.position = new Vector3(
+                Mathf.Lerp(transform.position.x, bossCameraTarget.position.x, 1.0f / cameraSpeed),
+                Mathf.Lerp(transform.position.y, bossCameraTarget.position.y, 1.0f / cameraSpeed),
+                Mathf.Lerp(transform.position.z, bossCameraTarget.position.z, 1.0f / cameraSpeed)
+            );
+        }
+        else
+        {
+            transform.position = new Vector3(targetX, targetY, transform.position.z);
+        }
     }
 
 
