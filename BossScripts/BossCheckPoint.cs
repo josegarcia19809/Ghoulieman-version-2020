@@ -9,19 +9,22 @@ public class BossCheckPoint : MonoBehaviour
     private BossController bossController;
     private CharacterMovement characterMovement;
     private Animator playerAnimator;
+
+    private SmoothFollow smoothFollow;
+
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<BoxCollider>();
-        bossController= GameObject.FindGameObjectWithTag("Boss").GetComponent<BossController>();
-        characterMovement= GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+        bossController = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossController>();
+        characterMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        smoothFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,6 +35,7 @@ public class BossCheckPoint : MonoBehaviour
             bossController.bossAwake = true;
             characterMovement.enabled = false;
             playerAnimator.Play("PlayerIdle");
+            smoothFollow.bossCameraActive = true;
         }
     }
 }
