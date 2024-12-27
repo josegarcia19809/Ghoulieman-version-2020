@@ -7,11 +7,15 @@ public class BossCheckPoint : MonoBehaviour
 {
     public new BoxCollider collider;
     private BossController bossController;
+    private CharacterMovement characterMovement;
+    private Animator playerAnimator;
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<BoxCollider>();
         bossController= GameObject.FindGameObjectWithTag("Boss").GetComponent<BossController>();
+        characterMovement= GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,6 +30,8 @@ public class BossCheckPoint : MonoBehaviour
         {
             collider.isTrigger = false;
             bossController.bossAwake = true;
+            characterMovement.enabled = false;
+            playerAnimator.Play("PlayerIdle");
         }
     }
 }
