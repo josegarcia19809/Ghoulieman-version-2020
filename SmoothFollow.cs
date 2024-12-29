@@ -63,11 +63,7 @@ public class SmoothFollow : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(
-                Mathf.Lerp(transform.position.x, cameraTarget.position.x, 1.0f / cameraSpeed),
-                Mathf.Lerp(transform.position.y, cameraTarget.position.y, 1.0f / cameraSpeed),
-                Mathf.Lerp(transform.position.z, cameraTarget.position.z, 1.0f / cameraSpeed)
-            );
+            transform.position = new Vector3(targetX, targetY, transform.position.z);
         }
     }
 
