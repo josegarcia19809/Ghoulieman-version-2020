@@ -22,6 +22,7 @@ public class BossController : MonoBehaviour
     private SmoothFollow smoothFollow;
     private GameObject player;
     private PlayerHealth playerHealth;
+    private BoxCollider bossCheckPoint;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class BossController : MonoBehaviour
         smoothFollow= GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
         player = GameManager.instance.Player;
         playerHealth = player.GetComponent<PlayerHealth>();
+        bossCheckPoint = GameObject.Find("BossCheckPoint").GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -85,8 +87,11 @@ public class BossController : MonoBehaviour
         if (playerHealth.CurrentHealth == 0)
         {
             bossAwake = false;
+            bossCheckPoint.isTrigger = true;
             print("Boss is sleeping again");
             smoothFollow.bossCameraActive = false;
+            animator.Play("BossIdle");
+            animator.SetBool("bossAwake", false);
         }
     }
 }
