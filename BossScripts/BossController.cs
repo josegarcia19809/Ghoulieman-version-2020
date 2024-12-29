@@ -29,7 +29,7 @@ public class BossController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        bossHealth = GetComponent<BossHealth>();
+        bossHealth = GetComponentInChildren<BossHealth>();
         swordTrigger = GameObject.Find("Boss").GetComponentInChildren<BoxCollider>();
         bossHealthBar.SetActive(false);
         smoothFollow= GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
@@ -92,6 +92,7 @@ public class BossController : MonoBehaviour
             smoothFollow.bossCameraActive = false;
             animator.Play("BossIdle");
             animator.SetBool("bossAwake", false);
+            bossHealth.bossHealth = 20;
         }
     }
 }
