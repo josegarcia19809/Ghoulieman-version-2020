@@ -17,6 +17,7 @@ public class BossController : MonoBehaviour
     public float attackWaitTime = 2.0f;
 
     private BoxCollider swordTrigger;
+    public GameObject bossHealthBar;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class BossController : MonoBehaviour
         animator = GetComponent<Animator>();
         bossHealth = GetComponent<BossHealth>();
         swordTrigger = GameObject.Find("Boss").GetComponentInChildren<BoxCollider>();
+        bossHealthBar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class BossController : MonoBehaviour
         {
             print("bossAwake");
             animator.SetBool("bossAwake", true);
+            bossHealthBar.SetActive(true);
             if (inBattle)
             {
                 if (!attacking)
