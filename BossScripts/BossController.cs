@@ -50,6 +50,7 @@ public class BossController : MonoBehaviour
                     if (attackTimer >= attackWaitTime)
                     {
                         attacking = false;
+                        animator.SetTrigger("bossAttack");
                         attackTimer = 0.0f;
                         print("Boss Smash");
                         swordTrigger.enabled = true;
