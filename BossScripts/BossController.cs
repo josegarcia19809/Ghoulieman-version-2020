@@ -14,7 +14,7 @@ public class BossController : MonoBehaviour
 
     private BossHealth bossHealth;
     public float attackTimer = 0.0f;
-    public float attackWaitTime = 2.0f;
+    public float attackWaitTime = 4.0f;
 
     private BoxCollider swordTrigger;
     public GameObject bossHealthBar;
@@ -59,7 +59,20 @@ public class BossController : MonoBehaviour
                     attackTimer += Time.deltaTime;
                     if (attackTimer >= attackWaitTime)
                     {
-                        BossAttack03();
+                        switch (Random.Range(0, 3))
+                        {
+                            case 0:
+                                BossAttack01();
+                                break;
+                            case 1:
+                                BossAttack02();
+                                break;
+                            case 2:
+                                BossAttack03();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
 
@@ -73,6 +86,31 @@ public class BossController : MonoBehaviour
             else
             {
                 idleTimer = 0.0f;
+            }
+
+            if (bossHealth.bossHealth > 0 && playerHealth.CurrentHealth > 0)
+            {
+                if (bossHealth.bossHealth > 15)
+                {
+                    attackWaitTime = 4.0f;
+                    print("attackWaitTime: "+attackWaitTime);
+                }
+
+                if (bossHealth.bossHealth > 10 && bossHealth.bossHealth < 16)
+                {
+                    attackWaitTime = 3.0f;
+                    print("attackWaitTime: "+attackWaitTime);
+                }
+                if (bossHealth.bossHealth > 5 && bossHealth.bossHealth < 11)
+                {
+                    attackWaitTime = 2.0f;
+                    print("attackWaitTime: "+attackWaitTime);
+                }
+                if (bossHealth.bossHealth >=1 && bossHealth.bossHealth < 6)
+                {
+                    attackWaitTime = 1.0f;
+                    print("attackWaitTime: "+attackWaitTime);
+                }
             }
         }
 
