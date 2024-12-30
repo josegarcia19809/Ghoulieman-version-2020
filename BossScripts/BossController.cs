@@ -58,7 +58,7 @@ public class BossController : MonoBehaviour
                     attackTimer += Time.deltaTime;
                     if (attackTimer >= attackWaitTime)
                     {
-                       BossAttack02();
+                       BossAttack03();
                     }
                 }
 
@@ -106,6 +106,15 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("bossAttack02");
         attackTimer = 0.0f;
         print("Boss attack 02");
+        swordTrigger.enabled = true;
+    }
+    
+    void BossAttack03()
+    {
+        attacking = false;
+        animator.SetTrigger("bossAttack03");
+        attackTimer = 0.0f;
+        print("Boss attack 03");
         swordTrigger.enabled = true;
     }
 }
