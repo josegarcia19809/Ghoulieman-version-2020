@@ -13,6 +13,9 @@ public class BossHealth : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private BoxCollider weaponCollider;
     private SphereCollider triggerCollider;
+    
+    public Material hurtBossMaterial;
+    private GameObject bossModel;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class BossHealth : MonoBehaviour
         capsuleCollider = GameObject.Find("Boss").GetComponent<CapsuleCollider>();
         weaponCollider = GameObject.Find("Boss").GetComponentInChildren<BoxCollider>();
         triggerCollider = GameObject.Find("Boss").GetComponentInChildren<SphereCollider>();
+        bossModel = GameObject.FindGameObjectWithTag("BossModel");
     }
 
     // Update is called once per frame
@@ -35,7 +39,10 @@ public class BossHealth : MonoBehaviour
         {
             animator.SetTrigger("isHit");
             bossHealth--;
-            print("Boss Health: " + bossHealth);
+            if (bossHealth < 6)
+            {
+                bossModel.GetComponent<Renderer>().material = hurtBossMaterial;
+            }
         }
         else
         {
