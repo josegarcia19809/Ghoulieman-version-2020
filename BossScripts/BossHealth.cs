@@ -9,11 +9,11 @@ public class BossHealth : MonoBehaviour
     private Animator animator;
     public bool bossDead = false;
     public BossController bossController;
-    
+
     private CapsuleCollider capsuleCollider;
     private BoxCollider weaponCollider;
     private SphereCollider triggerCollider;
-    
+
     public Material hurtBossMaterial;
     private GameObject bossModel;
 
@@ -44,7 +44,7 @@ public class BossHealth : MonoBehaviour
                 bossModel.GetComponent<Renderer>().material = hurtBossMaterial;
             }
         }
-        else
+        else if (bossHealth == 0)
         {
             BossDead();
         }

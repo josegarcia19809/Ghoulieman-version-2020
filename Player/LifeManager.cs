@@ -14,6 +14,8 @@ public class LifeManager : MonoBehaviour
     public GameObject gameOverScreen;
     public float waitAfterGameOver;
 
+    public GameObject bossHealthBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class LifeManager : MonoBehaviour
         {
             gameOverScreen.SetActive(true);
             player.gameObject.SetActive(false);
+            bossHealthBar.SetActive(false);
         }
 
         if (gameOverScreen.activeSelf)
