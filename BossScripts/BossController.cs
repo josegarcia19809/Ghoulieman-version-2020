@@ -117,7 +117,7 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("bossAttack03");
         attackTimer = 0.0f;
         
-        swordTrigger.enabled = true;
+        swordTrigger.enabled = false;
         StartCoroutine(FallingRocks());
     }
 
@@ -128,10 +128,8 @@ public class BossController : MonoBehaviour
         // Activar el módulo de emisión
         var emission = particleSystem.emission;
         emission.enabled = true;
-        //particleSystem.enableEmission = true;
         particleSystem.Play();
         yield return new WaitForSeconds(3.0f);
         emission.enabled = false;
-        //particleSystem.enableEmission = false;
     }
 }
