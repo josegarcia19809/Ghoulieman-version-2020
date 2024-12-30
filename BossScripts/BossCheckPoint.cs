@@ -11,6 +11,8 @@ public class BossCheckPoint : MonoBehaviour
     private Animator playerAnimator;
 
     private SmoothFollow smoothFollow;
+    public AudioClip newTrack;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class BossCheckPoint : MonoBehaviour
         characterMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         smoothFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +39,11 @@ public class BossCheckPoint : MonoBehaviour
             characterMovement.enabled = false;
             playerAnimator.Play("PlayerIdle");
             smoothFollow.bossCameraActive = true;
+
+            if (newTrack != null)
+            {
+                audioManager.ChangeMusic(newTrack);
+            }
         }
     }
 }
