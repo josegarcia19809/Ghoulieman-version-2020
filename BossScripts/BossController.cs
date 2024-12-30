@@ -18,11 +18,12 @@ public class BossController : MonoBehaviour
 
     private BoxCollider swordTrigger;
     public GameObject bossHealthBar;
-    
+
     private SmoothFollow smoothFollow;
     private GameObject player;
     private PlayerHealth playerHealth;
     private BoxCollider bossCheckPoint;
+    public new ParticleSystem particleSystem;
 
 
     // Start is called before the first frame update
@@ -32,10 +33,11 @@ public class BossController : MonoBehaviour
         bossHealth = GetComponentInChildren<BossHealth>();
         swordTrigger = GameObject.Find("Boss").GetComponentInChildren<BoxCollider>();
         bossHealthBar.SetActive(false);
-        smoothFollow= GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
+        smoothFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothFollow>();
         player = GameManager.instance.Player;
         playerHealth = player.GetComponent<PlayerHealth>();
         bossCheckPoint = GameObject.Find("BossCheckPoint").GetComponent<BoxCollider>();
+        //particleSystem = GameObject.Find("RockPS").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -43,7 +45,6 @@ public class BossController : MonoBehaviour
     {
         if (bossAwake)
         {
-            print("bossAwake");
             animator.SetBool("bossAwake", true);
             bossHealthBar.SetActive(true);
             if (inBattle)
@@ -58,7 +59,7 @@ public class BossController : MonoBehaviour
                     attackTimer += Time.deltaTime;
                     if (attackTimer >= attackWaitTime)
                     {
-                       BossAttack03();
+                        BossAttack03();
                     }
                 }
 
@@ -74,6 +75,7 @@ public class BossController : MonoBehaviour
                 idleTimer = 0.0f;
             }
         }
+
         BossReset();
     }
 
@@ -99,7 +101,7 @@ public class BossController : MonoBehaviour
         print("Boss attack 01");
         swordTrigger.enabled = true;
     }
-    
+
     void BossAttack02()
     {
         attacking = false;
@@ -108,13 +110,28 @@ public class BossController : MonoBehaviour
         print("Boss attack 02");
         swordTrigger.enabled = true;
     }
-    
+
     void BossAttack03()
     {
         attacking = false;
         animator.SetTrigger("bossAttack03");
         attackTimer = 0.0f;
-        print("Boss attack 03");
+        
         swordTrigger.enabled = true;
+        StartCoroutine(FallingRocks());
+    }
+
+    IEnumerator FallingRocks()
+    {
+        print("Boss attack 03");
+        yield return new WaitForSeconds(2.0f);
+        // Activar el módulo de emisión
+        var emission = particleSystem.emission;
+        emission.enabled = true;
+        //particleSystem.enableEmission = true;
+        particleSystem.Play();
+        yield return new WaitForSeconds(3.0f);
+        emission.enabled = false;
+        //particleSystem.enableEmission = false;
     }
 }

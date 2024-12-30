@@ -33,8 +33,6 @@ public class EnemySpawner : MonoBehaviour
         {
             playerInRange = false;
         }
-
-        print("Player In Range Spawner: " + playerInRange);
     }
 
     public IEnumerator SpawnEnemies()

@@ -49,7 +49,6 @@ public class Enemy02Health : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Recibiendo daño");
         if (timer >= timeSinceLastHit && !GameManager.instance.GameOver)
         {
             if (other.CompareTag("PlayerWeapon"))
