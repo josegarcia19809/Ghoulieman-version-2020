@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void TakeHit()
+    public void TakeHit()
     {
         // Solamente hieren al Player
         if (currentHealth > 0)
@@ -86,7 +86,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else // Aqui matan al Player
         {
-            GameManager.instance.PlayerHit(currentHealth);
+            //GameManager.instance.PlayerHit(currentHealth);
             _animator.SetTrigger("isDead");
             _characterMovement.enabled = false;
             _audioSource.PlayOneShot(deadAudio);
